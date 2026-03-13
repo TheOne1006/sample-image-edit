@@ -171,14 +171,15 @@ export default function Sidebar({
                 <div className="space-y-1.5">
                   <label className="text-xs font-medium text-gray-700">Font Family</label>
                   <select
-                    value={(selectedElement as TextElement).fontFamily || 'SimSun'}
+                    value={(selectedElement as TextElement).fontFamily || '"Times New Roman", "Songti SC", SimSun, serif'}
                     onChange={(e) =>
                       onUpdateElement({ ...selectedElement, fontFamily: e.target.value } as TextElement)
                     }
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none"
                   >
+                    <option value="'-apple-system', BlinkMacSystemFont, 'PingFang SC', 'SF Pro SC', 'Helvetica Neue', sans-serif">苹果系统/苹方 (PingFang SC)</option>
                     <option value="'Ma Shan Zheng', cursive">粗体新中式书法 (Ma Shan Zheng)</option>
-                    <option value="'SimSun', 'Songti SC', serif">宋体 (SimSun)</option>
+                    <option value='"Times New Roman", "Songti SC", SimSun, serif'>宋体 (Songti)</option>
                   </select>
                 </div>
 
