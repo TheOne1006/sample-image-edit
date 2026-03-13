@@ -1,0 +1,5 @@
+{
+  "name": "Simple Image Editor",
+  "description": "A pure frontend application for simple image editing. Upload a background image, add text and images, resize, and export.",
+  "requestFramePermissions": []
+}
