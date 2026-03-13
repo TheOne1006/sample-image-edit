@@ -33,11 +33,29 @@ const URLImage = ({ element, isSelected, onSelect, onChange }: any) => {
         ref={shapeRef}
         {...element}
         draggable
+        onDragMove={(e) => {
+          onChange({
+            ...element,
+            x: e.target.x(),
+            y: e.target.y(),
+          });
+        }}
         onDragEnd={(e) => {
           onChange({
             ...element,
             x: e.target.x(),
             y: e.target.y(),
+          });
+        }}
+        onTransform={(e) => {
+          const node = shapeRef.current;
+          onChange({
+            ...element,
+            x: node.x(),
+            y: node.y(),
+            scaleX: node.scaleX(),
+            scaleY: node.scaleY(),
+            rotation: node.rotation(),
           });
         }}
         onTransformEnd={(e) => {
@@ -86,11 +104,29 @@ const EditableText = ({ element, isSelected, onSelect, onChange }: any) => {
         ref={shapeRef}
         {...element}
         draggable
+        onDragMove={(e) => {
+          onChange({
+            ...element,
+            x: e.target.x(),
+            y: e.target.y(),
+          });
+        }}
         onDragEnd={(e) => {
           onChange({
             ...element,
             x: e.target.x(),
             y: e.target.y(),
+          });
+        }}
+        onTransform={(e) => {
+          const node = shapeRef.current;
+          onChange({
+            ...element,
+            x: node.x(),
+            y: node.y(),
+            scaleX: node.scaleX(),
+            scaleY: node.scaleY(),
+            rotation: node.rotation(),
           });
         }}
         onTransformEnd={(e) => {

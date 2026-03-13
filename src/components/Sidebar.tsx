@@ -114,8 +114,28 @@ export default function Sidebar({
 
             <div className="space-y-1.5">
               <div className="flex justify-between items-center">
-                <label className="text-xs font-medium text-gray-700">Scale (Size)</label>
-                <span className="text-xs text-gray-500">{Math.round(selectedElement.scaleX * 100)}%</span>
+                <label className="text-xs font-medium text-gray-700">Scale (%)</label>
+                <div className="flex items-center gap-1">
+                  <input
+                    type="number"
+                    min="10"
+                    max="1000"
+                    value={Math.round(selectedElement.scaleX * 100)}
+                    onChange={(e) => {
+                      const val = parseInt(e.target.value);
+                      if (!isNaN(val)) {
+                        const scale = val / 100;
+                        onUpdateElement({
+                          ...selectedElement,
+                          scaleX: scale,
+                          scaleY: scale,
+                        });
+                      }
+                    }}
+                    className="w-16 px-2 py-1 text-xs border border-gray-300 rounded text-right focus:ring-1 focus:ring-indigo-500 outline-none"
+                  />
+                  <span className="text-xs text-gray-500">%</span>
+                </div>
               </div>
               <input
                 type="range"
