@@ -112,6 +112,28 @@ export default function Sidebar({
               </button>
             </div>
 
+            <div className="space-y-1.5">
+              <div className="flex justify-between items-center">
+                <label className="text-xs font-medium text-gray-700">Scale (Size)</label>
+                <span className="text-xs text-gray-500">{Math.round(selectedElement.scaleX * 100)}%</span>
+              </div>
+              <input
+                type="range"
+                min="10"
+                max="500"
+                value={Math.round(selectedElement.scaleX * 100)}
+                onChange={(e) => {
+                  const scale = parseInt(e.target.value) / 100;
+                  onUpdateElement({
+                    ...selectedElement,
+                    scaleX: scale,
+                    scaleY: scale,
+                  });
+                }}
+                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-indigo-600"
+              />
+            </div>
+
             {selectedElement.type === 'text' && (
               <div className="space-y-4">
                 <div className="space-y-1.5">
@@ -123,21 +145,6 @@ export default function Sidebar({
                     }
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none resize-none"
                     rows={3}
-                  />
-                </div>
-
-                <div className="space-y-1.5">
-                  <label className="text-xs font-medium text-gray-700">Font Size</label>
-                  <input
-                    type="number"
-                    value={(selectedElement as TextElement).fontSize}
-                    onChange={(e) =>
-                      onUpdateElement({
-                        ...selectedElement,
-                        fontSize: parseInt(e.target.value) || 12,
-                      } as TextElement)
-                    }
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none"
                   />
                 </div>
 
@@ -177,12 +184,6 @@ export default function Sidebar({
                     ))}
                   </div>
                 </div>
-              </div>
-            )}
-
-            {selectedElement.type === 'image' && (
-              <div className="bg-blue-50 text-blue-700 p-3 rounded-lg text-sm">
-                Use the handles on the canvas to resize and rotate the image.
               </div>
             )}
           </div>
