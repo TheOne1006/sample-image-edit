@@ -22,6 +22,7 @@ export default function App() {
       text: 'Double click to edit',
       fontSize: 24,
       fontFamily: "'-apple-system', BlinkMacSystemFont, 'PingFang SC', 'SF Pro SC', 'Helvetica Neue', sans-serif",
+      fontStyle: 'normal',
       fill: '#000000',
       scaleX: 1,
       scaleY: 1,

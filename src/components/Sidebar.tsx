@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { Type, Image as ImageIcon, Download, Trash2, Upload } from 'lucide-react';
+import { Type, Image as ImageIcon, Download, Trash2, Upload, Bold } from 'lucide-react';
 import { CanvasElement, TextElement } from '../types';
 
 interface SidebarProps {
@@ -168,26 +168,49 @@ export default function Sidebar({
                   />
                 </div>
 
-                <div className="space-y-1.5">
-                  <label className="text-xs font-medium text-gray-700">Font Family</label>
-                  <select
-                    value={(selectedElement as TextElement).fontFamily || '"Times New Roman", "Songti SC", SimSun, serif'}
-                    onChange={(e) =>
-                      onUpdateElement({ ...selectedElement, fontFamily: e.target.value } as TextElement)
-                    }
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none"
-                  >
-                    <option value="'-apple-system', BlinkMacSystemFont, 'PingFang SC', 'SF Pro SC', 'Helvetica Neue', sans-serif">苹果系统/苹方 (PingFang SC)</option>
-                    <option value="'Ma Shan Zheng', cursive">粗体新中式书法 (Ma Shan Zheng)</option>
-                    <option value='"Times New Roman", "Songti SC", SimSun, serif'>宋体 (Songti)</option>
-                  </select>
+                <div className="flex gap-3">
+                  <div className="space-y-1.5 flex-1">
+                    <label className="text-xs font-medium text-gray-700">Font Family</label>
+                    <select
+                      value={(selectedElement as TextElement).fontFamily || '"Times New Roman", "Songti SC", SimSun, serif'}
+                      onChange={(e) =>
+                        onUpdateElement({ ...selectedElement, fontFamily: e.target.value } as TextElement)
+                      }
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none"
+                    >
+                      <option value="'-apple-system', BlinkMacSystemFont, 'PingFang SC', 'SF Pro SC', 'Helvetica Neue', sans-serif">苹果系统/苹方 (PingFang SC)</option>
+                      <option value="'Ma Shan Zheng', cursive">粗体新中式书法 (Ma Shan Zheng)</option>
+                      <option value='"Times New Roman", "Songti SC", SimSun, serif'>宋体 (Songti)</option>
+                    </select>
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-medium text-gray-700">Style</label>
+                    <button
+                      onClick={() => {
+                        const isBold = (selectedElement as TextElement).fontStyle === 'bold';
+                        onUpdateElement({ ...selectedElement, fontStyle: isBold ? 'normal' : 'bold' } as TextElement);
+                      }}
+                      className={`flex items-center justify-center w-10 h-[38px] rounded-lg border transition-colors ${
+                        (selectedElement as TextElement).fontStyle === 'bold'
+                          ? 'bg-indigo-50 border-indigo-200 text-indigo-700'
+                          : 'bg-white border-gray-300 text-gray-600 hover:bg-gray-50'
+                      }`}
+                      title="Bold"
+                    >
+                      <Bold size={18} />
+                    </button>
+                  </div>
                 </div>
 
                 <div className="space-y-1.5">
                   <label className="text-xs font-medium text-gray-700">Color</label>
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-3 flex-wrap">
                     {[
+                      { label: 'Bright Red', value: '#FF0000' },
                       { label: 'Dark Red', value: '#8B0000' },
+                      { label: 'Green', value: '#16A34A' },
+                      { label: 'Blue', value: '#2563EB' },
                       { label: 'Dark Brown', value: '#5D4037' },
                       { label: 'Black', value: '#000000' },
                     ].map((color) => (
